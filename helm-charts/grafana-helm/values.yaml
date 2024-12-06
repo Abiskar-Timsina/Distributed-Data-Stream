@@ -1,0 +1,28 @@
+grafana:
+  # Labels and metadata
+  deploymentName: "grafana-deployment"
+  appName: "grafana-app"
+  namespace: "visualizers"
+
+  # Service Metadata
+  serviceName: "grafana-service"
+
+  # Image Config
+  imageName: "grafana/grafana-oss"
+  imageVersion: "latest"
+
+  # Replicaset
+  replicas: 1
+
+  # Resources
+  cpuLimit: "300m"
+  memoryLimit: "128Mi"
+
+  cpuRequest: "100m"
+  memoryRequest: "64Mi"
+
+ingress:
+  name: "ingress-deployment"
+  namespace: "visualizers"
+  timeout: "30000" # Nginx Ingress uses, ms for timeouts.
+

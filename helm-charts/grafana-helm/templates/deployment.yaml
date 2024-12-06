@@ -1,0 +1,30 @@
+# Contains definations for grafana.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.grafana.deploymentName  }}
+  namespace: {{ .Values.grafana.namespace }}
+  labels:
+    app: {{  .Values.grafana.appName  }}
+spec:
+  replicas: {{  .Values.grafana.replicas  }}
+  selector:
+    matchLabels:
+      app: {{  .Values.grafana.appName  }}
+  template:
+    metadata:
+      labels:
+        app: {{  .Values.grafana.appName  }}
+    spec:
+      containers:
+        - name: grafana
+          image: {{ .Values.grafana.imageName  }}:{{ .Values.grafana.imageVersion  }}
+          resources:
+              limits:
+                cpu: {{ .Values.grafana.cpuLimit  }} 
+                memory: {{ .Values.grafana.memoryLimit  }}
+              requests:
+                cpu: {{ .Values.grafana.cpuRequest  }} 
+                memory: {{ .Values.grafana.memoryRequest  }}
+          ports:
+          - containerPort: 3000
