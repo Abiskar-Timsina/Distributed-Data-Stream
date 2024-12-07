@@ -9,13 +9,14 @@ postgres:
   cpuRequest: "100m"
   memoryRequest: "32Mi"
   password: "123#password"
+  serviceName: "postgres-service"
 
 volume:
   name: "postgres-claim"
   namespace: "databases"
   accessMode: "ReadWriteMany"
   requiredStorage: "128Mi"
-  storageClassName: "shared-volume"
+  storageClassName: "postgres-volume"
 
 configMap:
   name: "postgres-configmap"

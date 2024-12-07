@@ -21,7 +21,7 @@ spec:
           image: {{ .Values.postgres.imageName  }}:{{ .Values.postgres.imageVersion  }}
           envFrom:
             - configMapRef:
-              name: {{ .Values.configMap.name }}
+                name: {{ .Values.configMap.name }}
 
           volumeMounts:
             - mountPath: /var/lib/postgresql/data
@@ -35,6 +35,7 @@ spec:
                 memory: {{ .Values.postgres.memoryRequest  }}
           ports:
           - containerPort: 5432
+
       volumes:
         - name: postgres-storage
           persistentVolumeClaim:
