@@ -30,7 +30,12 @@ spec:
           # But, even that may cause issues, so the easiest thing to do is run as root,
           # i.e id 0
           securityContext:
-            runAsUser: 0
+            # This is a bug in minikube where the provisoner doesn't work well 
+            # with hostPath, we'll have to run
+            # `sudo chown $(whoami):$(whoami) /data`
+            # The 1000 here is the id of docker / whoami user
+            runAsUser: 1000
+            fsGroup: 1000
 
           resources:
               limits:
