@@ -26,3 +26,8 @@ ingress:
   namespace: "visualizers"
   timeout: "30000" # Nginx Ingress uses, ms for timeouts.
 
+volume:
+  name: "visualizers-claim"
+  namespace: "visualizers"
+  accessMode: "ReadWriteMany"
+  requiredStorage: "64Mi"

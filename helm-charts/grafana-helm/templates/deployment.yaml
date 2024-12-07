@@ -19,6 +19,9 @@ spec:
       containers:
         - name: grafana
           image: {{ .Values.grafana.imageName  }}:{{ .Values.grafana.imageVersion  }}
+          volumeMounts:
+            - mountPath: /var/lib/grafana
+              name: grafana-storage
           resources:
               limits:
                 cpu: {{ .Values.grafana.cpuLimit  }} 
@@ -28,3 +31,7 @@ spec:
                 memory: {{ .Values.grafana.memoryRequest  }}
           ports:
           - containerPort: 3000
+      volumes:
+        - name: grafana-storage
+          persistentVolumeClaim:
+            claimName: {{ .Values.volume.name }}
