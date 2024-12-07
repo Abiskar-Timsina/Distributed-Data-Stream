@@ -1,0 +1,6 @@
+pvc:
+  name: "visualizers-volume"
+  size: "512Mi"
+  accessMode: "ReadWriteMany"
+  mountPath: "/data"
+  nodeName: "minkube"
