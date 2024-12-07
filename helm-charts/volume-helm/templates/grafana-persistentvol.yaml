@@ -1,0 +1,28 @@
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: {{ .Values.grafanaVolume.name }}
+spec:
+  capacity:
+    storage: {{ .Values.grafanaVolume.size }}
+  accessModes:
+    - {{ .Values.grafanaVolume.accessMode }}
+  persistentVolumeReclaimPolicy: Retain
+
+  # local: We'd rather use the `hostPath` instead of `local` for this 
+  # particular PersistentVolume, since, I'd rather store the files 
+  # in my host Device instead of putting strain on minikube's 
+  # storage provisioner
+  hostPath:
+    path: {{ .Values.grafanaVolume.mountPath }}
+
+  storageClassName: {{ .Values.grafanaVolume.storageClassName }}
+
+  nodeAffinity:
+    required:
+      nodeSelectorTerms:
+        - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+                - {{ .Values.grafanaVolume.nodeName }} # We need to make sure we're using grafanaVolume within a specified node.
