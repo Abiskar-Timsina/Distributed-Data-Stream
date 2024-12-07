@@ -9,3 +9,4 @@ spec:
   resources:
     requests:
       storage: {{ .Values.volume.requiredStorage }}
+  storageClassName: {{ .Values.volume.storageClassName }}

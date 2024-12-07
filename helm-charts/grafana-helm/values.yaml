@@ -31,3 +31,7 @@ volume:
   namespace: "visualizers"
   accessMode: "ReadWriteMany"
   requiredStorage: "64Mi"
+  # Must be the same name as the persistant-volume 
+  # classname for this to attach to that particular
+  # persistant-volume
+  storageClassName: "shared-volume"
