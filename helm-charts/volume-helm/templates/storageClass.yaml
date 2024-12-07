@@ -1,7 +1,20 @@
 apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
-  name: {{ .Values.pv.storageClassName }}
+  name: {{ .Values.grafanaVolume.storageClassName }}
+# The provisioner is the host so, simple use the host path provisioner
+provisioner: kubernetes.io/host-path 
+reclaimPolicy: Retain
+# volumeBindingMode: WaitForFirstConsumer
+# We can use Immediate with local classes. 
+volumeBindingMode: Immediate
+
+---
+
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata:
+  name: {{ .Values.postgressVolume.storageClassName }}
 # The provisioner is the host so, simple use the host path provisioner
 provisioner: kubernetes.io/host-path 
 reclaimPolicy: Retain
