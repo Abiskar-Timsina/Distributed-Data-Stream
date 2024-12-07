@@ -1,6 +1,7 @@
 postgres:
   deploymentName: "postgres-deployment"
   namespace: "databases"
+  replicas: 1
   appName: "postgres-app"
   imageName: "postgres"
   imageVersion: "17-bookworm"
@@ -20,3 +21,7 @@ volume:
 
 configMap:
   name: "postgres-configmap"
+
+ingress:
+  name: "postgres-ingress"
+  timeout: "600000"

@@ -8,8 +8,8 @@ grafanaVolume:
   nodeName: "minikube"
   storageClassName: "grafana-volume"
 
-postgressVolume:
-  name: "postgress-volume"
+postgresVolume:
+  name: "postgres-volume"
   size: "256Mi"
   accessMode: "ReadWriteMany"
   mountPath: "/data/database/"

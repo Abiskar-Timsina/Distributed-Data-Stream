@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: {{ .Values.postgressVolume.name }}
+  name: {{ .Values.postgresVolume.name }}
 spec:
   capacity:
-    storage: {{ .Values.postgressVolume.size }}
+    storage: {{ .Values.postgresVolume.size }}
   accessModes:
-    - {{ .Values.postgressVolume.accessMode }}
+    - {{ .Values.postgresVolume.accessMode }}
   persistentVolumeReclaimPolicy: Retain
 
   # local: We'd rather use the `hostPath` instead of `local` for this 
@@ -14,9 +14,9 @@ spec:
   # in my host Device instead of putting strain on minikube's 
   # storage provisioner
   hostPath:
-    path: {{ .Values.postgressVolume.mountPath }}
+    path: {{ .Values.postgresVolume.mountPath }}
 
-  storageClassName: {{ .Values.postgressVolume.storageClassName }}
+  storageClassName: {{ .Values.postgresVolume.storageClassName }}
 
   nodeAffinity:
     required:
@@ -25,4 +25,4 @@ spec:
             - key: kubernetes.io/hostname
               operator: In
               values:
-                - {{ .Values.postgressVolume.nodeName }} # We need to make sure we're using postgressVolume within a specified node.
+                - {{ .Values.postgresVolume.nodeName }} # We need to make sure we're using postgresVolume within a specified node.

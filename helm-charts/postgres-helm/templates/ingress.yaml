@@ -1,0 +1,30 @@
+# Config for Ingress
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ .Values.ingress.name }}
+  namespace: {{ .Values.postgres.namespace }}
+  annotations:
+    # Not using any certificates for this
+    # cert-manager.io/cluster-issuer: certbot
+    # the timeout is in ms.
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: "{{ .Values.ingress.timeout }}"
+    nginx.ingress.kubernetes.io/proxy-idle-timeout: "{{ .Values.ingress.timeout }}"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "{{ .Values.ingress.timeout }}"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "{{ .Values.ingress.timeout }}"
+    nginx.ingress.kubernetes.io/upstream-keepalive-timeout: "{{  .Values.ingress.timeout  }}"
+    nginx.ingress.kubernetes.io/backend-protocol: HTTP
+    nginx.ingress.kubernetes.io/ssl-passthrough: "true"
+
+spec:
+  rules:
+    - host: postgres.ack.local
+      http:
+        paths:
+          - path: /
+            pathType: Prefix
+            backend:
+              service:
+                name: {{ .Values.postgres.serviceName }}
+                port:
+                  number: 80

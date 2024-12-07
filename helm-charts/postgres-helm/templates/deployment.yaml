@@ -19,6 +19,10 @@ spec:
       containers:
         - name: postgres
           image: {{ .Values.postgres.imageName  }}:{{ .Values.postgres.imageVersion  }}
+
+          securityContext:
+            runAsUser: 0
+
           envFrom:
             - configMapRef:
                 name: {{ .Values.configMap.name }}
