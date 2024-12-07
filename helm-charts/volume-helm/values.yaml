@@ -1,9 +1,22 @@
-pv:
-  name: "persistant-volume"
-  size: "512Mi"
+grafanaVolume:
+  name: "grafana-volume"
+  size: "256Mi"
   accessMode: "ReadWriteMany"
-  mountPath: "/data"
-  # The name of the node is quite important, w/o it 
+  mountPath: "/data/grafana/"
+  # The name of the node is quite important, w/o it
   # We'll encounter a "no nodes assigned err"
   nodeName: "minikube"
-  storageClassName: "shared-volume"
+  storageClassName: "grafana-volume"
+
+postgressVolume:
+  name: "postgress-volume"
+  size: "256Mi"
+  accessMode: "ReadWriteMany"
+  mountPath: "/data/database/"
+  # The name of the node is quite important, w/o it
+  # We'll encounter a "no nodes assigned err"
+  nodeName: "minikube"
+
+  # The storageclasses can be shared, no biggie but, 
+  # maybe a better idea to seperate these.
+  storageClassName: "postgres-volume"
