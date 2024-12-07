@@ -22,6 +22,16 @@ spec:
           volumeMounts:
             - mountPath: /var/lib/grafana
               name: grafana-storage
+          # We need securityContext here because Grafana creates a new user internally
+          # when this user tries to make a dir in our persistant volume, it causes a 
+          # permission issue. To overcome this, we use `minikube ssh`, and run the `id`
+          # command to see the user group and then run at that user.
+          #
+          # But, even that may cause issues, so the easiest thing to do is run as root,
+          # i.e id 0
+          securityContext:
+            runAsUser: 0
+
           resources:
               limits:
                 cpu: {{ .Values.grafana.cpuLimit  }} 
