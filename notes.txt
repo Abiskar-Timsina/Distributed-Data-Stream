@@ -1,0 +1,10 @@
+Endpoints:
+<service-name>.<namespace>.svc.cluster.local
+
+Minikube Config: 
+We'll have to mount the /data dir in minikube in order for the data to persist.
+
+```
+$ minikube mount $HOME"/path":/data
+
+```
