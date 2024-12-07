@@ -1,0 +1,21 @@
+postgres:
+  deploymentName: "postgres-deployment"
+  namespace: "databases"
+  appName: "postgres-app"
+  imageName: "postgres"
+  imageVersion: "17-bookworm"
+  cpuLimit: "500m"
+  memoryLimit: "512Mi"
+  cpuRequest: "100m"
+  memoryRequest: "32Mi"
+  password: "123#password"
+
+volume:
+  name: "postgres-claim"
+  namespace: "databases"
+  accessMode: "ReadWriteMany"
+  requiredStorage: "128Mi"
+  storageClassName: "shared-volume"
+
+configMap:
+  name: "postgres-configmap"

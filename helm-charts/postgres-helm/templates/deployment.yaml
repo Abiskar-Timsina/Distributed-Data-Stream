@@ -1,0 +1,41 @@
+# Contains definations for postgres.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.postgres.deploymentName  }}
+  namespace: {{ .Values.postgres.namespace }}
+  labels:
+    app: {{  .Values.postgres.appName  }}
+spec:
+  replicas: {{  .Values.postgres.replicas  }}
+  selector:
+    matchLabels:
+      app: {{  .Values.postgres.appName  }}
+  template:
+    metadata:
+      labels:
+        app: {{  .Values.postgres.appName  }}
+    spec:
+      containers:
+        - name: postgres
+          image: {{ .Values.postgres.imageName  }}:{{ .Values.postgres.imageVersion  }}
+          envFrom:
+            - configMapRef:
+              name: {{ .Values.configMap.name }}
+
+          volumeMounts:
+            - mountPath: /var/lib/postgresql/data
+              name: postgres-storage
+          resources:
+              limits:
+                cpu: {{ .Values.postgres.cpuLimit  }} 
+                memory: {{ .Values.postgres.memoryLimit  }}
+              requests:
+                cpu: {{ .Values.postgres.cpuRequest  }} 
+                memory: {{ .Values.postgres.memoryRequest  }}
+          ports:
+          - containerPort: 5432
+      volumes:
+        - name: postgres-storage
+          persistentVolumeClaim:
+            claimName: {{ .Values.volume.name }}
