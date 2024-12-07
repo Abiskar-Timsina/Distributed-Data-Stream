@@ -9,7 +9,7 @@ spec:
   ports:
     - name: postgres-port
       protocol: TCP
-      port: 80
+      port: 5432
       targetPort: 5432
 
   type: ClusterIP
