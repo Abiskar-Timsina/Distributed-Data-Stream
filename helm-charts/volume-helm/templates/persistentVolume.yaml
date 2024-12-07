@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: PersistentVolume
 metadata:
-  name: {{ .Values.pvc.name }}
+  name: {{ .Values.pv.name }}
 spec:
   capacity:
-    storage: {{ .Values.pvc.size }}
+    storage: {{ .Values.pv.size }}
   accessModes:
-    - {{ .Values.pvc.accessMode }}
+    - {{ .Values.pv.accessMode }}
   persistentVolumeReclaimPolicy: Retain
 
   # local: We'd rather use the `hostPath` instead of `local` for this 
@@ -14,7 +14,9 @@ spec:
   # in my host Device instead of putting strain on minikube's 
   # storage provisioner
   hostPath:
-    path: {{ .Values.pvc.mountPath }}
+    path: {{ .Values.pv.mountPath }}
+
+  storageClassName: {{ .Values.pv.storageClassName }}
 
   nodeAffinity:
     required:
@@ -23,4 +25,4 @@ spec:
             - key: kubernetes.io/hostname
               operator: In
               values:
-                - {{ .Values.pvc.nodeName }} # We need to make sure we're using pvc within a specified node.
+                - {{ .Values.pv.nodeName }} # We need to make sure we're using pv within a specified node.

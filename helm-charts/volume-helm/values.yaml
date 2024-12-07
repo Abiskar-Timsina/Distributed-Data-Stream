@@ -1,6 +1,9 @@
-pvc:
-  name: "visualizers-volume"
+pv:
+  name: "persistant-volume"
   size: "512Mi"
   accessMode: "ReadWriteMany"
   mountPath: "/data"
-  nodeName: "minkube"
+  # The name of the node is quite important, w/o it 
+  # We'll encounter a "no nodes assigned err"
+  nodeName: "minikube"
+  storageClassName: "shared-volume"
