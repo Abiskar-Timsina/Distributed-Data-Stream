@@ -5,7 +5,7 @@ grafanaVolume:
   mountPath: "/data/grafana/"
   # The name of the node is quite important, w/o it
   # We'll encounter a "no nodes assigned err"
-  nodeName: "minikube"
+  nodeName: "skar"
   storageClassName: "grafana-volume"
 
 postgresVolume:
@@ -15,8 +15,8 @@ postgresVolume:
   mountPath: "/data/database/"
   # The name of the node is quite important, w/o it
   # We'll encounter a "no nodes assigned err"
-  nodeName: "minikube"
+  nodeName: "skar"
 
-  # The storageclasses can be shared, no biggie but, 
+  # The storageclasses can be shared, no biggie but,
   # maybe a better idea to seperate these.
   storageClassName: "postgres-volume"
