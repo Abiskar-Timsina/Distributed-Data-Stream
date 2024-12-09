@@ -34,8 +34,7 @@ spec:
             # with hostPath, we'll have to run
             # `sudo chown $(whoami):$(whoami) /data`
             # The 1000 here is the id of docker / whoami user
-            runAsUser: 1000
-            fsGroup: 1000
+            runAsUser: 0
 
           resources:
               limits:
