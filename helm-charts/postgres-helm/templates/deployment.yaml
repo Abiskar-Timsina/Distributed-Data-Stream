@@ -20,14 +20,6 @@ spec:
         - name: postgres
           image: {{ .Values.postgres.imageName  }}:{{ .Values.postgres.imageVersion  }}
 
-          securityContext:
-            # This is a bug in minikube where the provisoner doesn't work well 
-            # with hostPath, we'll have to run
-            # `sudo chown $(whoami):$(whoami) /data`
-            # The 1000 here is the id of docker / whoami user
-            runAsUser: 1000
-            fsGroup: 1000
-
           envFrom:
             - configMapRef:
                 name: {{ .Values.configMap.name }}
