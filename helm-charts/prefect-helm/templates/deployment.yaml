@@ -1,0 +1,33 @@
+# Contains definations for prefect.
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Values.prefect.deploymentName  }}
+  namespace: {{ .Values.prefect.namespace }}
+  labels:
+    app: {{  .Values.prefect.appName  }}
+spec:
+  replicas: {{  .Values.prefect.replicas  }}
+  selector:
+    matchLabels:
+      app: {{  .Values.prefect.appName  }}
+  template:
+    metadata:
+      labels:
+        app: {{  .Values.prefect.appName  }}
+    spec:
+      containers:
+        - name: prefect
+          image: {{ .Values.prefect.imageName  }}:{{ .Values.prefect.imageVersion  }}
+          imagePullPolicy: Never
+          resources:
+              limits:
+                cpu: {{ .Values.prefect.cpuLimit  }} 
+                memory: {{ .Values.prefect.memoryLimit  }}
+              requests:
+                cpu: {{ .Values.prefect.cpuRequest  }} 
+                memory: {{ .Values.prefect.memoryRequest  }}
+          ports:
+          - containerPort: 4200
+          - containerPort: 8080
+          - containerPort: 4201

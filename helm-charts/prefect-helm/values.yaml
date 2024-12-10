@@ -1,0 +1,27 @@
+prefect:
+  # Labels and metadata
+  deploymentName: "prefect-deployment"
+  appName: "prefect-app"
+  namespace: "workflow"
+
+  # Service Metadata
+  serviceName: "prefect-service"
+
+  # Image Config
+  imageName: "prefect-k8s"
+  imageVersion: "latest"
+
+  # Replicaset
+  replicas: 1
+
+  # Resources
+  cpuLimit: "1200m"
+  memoryLimit: "1024Mi"
+
+  cpuRequest: "100m"
+  memoryRequest: "256Mi"
+
+ingress:
+  name: "prefect-deployment"
+  namespace: "workflow"
+  timeout: "30000" # Nginx Ingress uses, ms for timeouts.
