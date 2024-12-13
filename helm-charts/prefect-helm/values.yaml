@@ -8,7 +8,7 @@ prefect:
   serviceName: "prefect-service"
 
   # Image Config
-  imageName: "prefect-k8s"
+  imageName: "abiskartimsina/prefect-k8s"
   imageVersion: "latest"
 
   # Replicaset
@@ -21,7 +21,11 @@ prefect:
   cpuRequest: "100m"
   memoryRequest: "256Mi"
 
+configMap:
+  name: "prefect-configmap"
+
 ingress:
   name: "prefect-deployment"
   namespace: "workflow"
   timeout: "30000" # Nginx Ingress uses, ms for timeouts.
+  hostname: "workflow.ack.local"
