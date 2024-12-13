@@ -19,7 +19,9 @@ spec:
       containers:
         - name: prefect
           image: {{ .Values.prefect.imageName  }}:{{ .Values.prefect.imageVersion  }}
-          imagePullPolicy: Never
+          envFrom:
+            - configMapRef:
+                name: {{ .Values.configMap.name }}
           resources:
               limits:
                 cpu: {{ .Values.prefect.cpuLimit  }} 
@@ -29,5 +31,3 @@ spec:
                 memory: {{ .Values.prefect.memoryRequest  }}
           ports:
           - containerPort: 4200
-          - containerPort: 8080
-          - containerPort: 4201
