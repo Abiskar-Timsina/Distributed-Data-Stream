@@ -1,0 +1,10 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ .Values.configMap.name }}
+  namespace: {{ .Values.prefect.namespace }}
+data:
+    # https://stackoverflow.com/questions/76042242/prefect-cant-connect-to-server-api-at-http-0-0-0-04200-api-in-docker-contai
+  PREFECT_API_URL: "http://0.0.0.0:4200/api"
+  PREFECT_SERVER_API_HOST:  "0.0.0.0"
+  PREFECT_UI_API_URL: "http://{{ .Values.ingress.hostname }}/api"
