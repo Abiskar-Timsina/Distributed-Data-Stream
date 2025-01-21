@@ -1,10 +1,28 @@
 Endpoints:
 <service-name>.<namespace>.svc.cluster.local
+postgres-service.databases.svc.cluster.local:5432
 
 Minikube Config: 
 We'll have to mount the /data dir in minikube in order for the data to persist.
 
 ```
 $ minikube mount $HOME"/path":/data
+
+```
+
+Setup: 
+  - Port forwarding rules for local testing.
+
+
+prefect config view --show-defaults
+
+
+To overcome the DNS issue with service resolution, use the flag
+ISSUE: https://github.com/kubernetes/minikube/issues/3511
+```
+minikube --vm-driver=none start \
+  --extra-config=kubelet.resolv-conf=/run/systemd/resolve/resolv.conf
+
+minikube start --driver=none --extra-config=kubelet.resolv-conf=/run/systemd/resolve/resolv.conf
 
 ```

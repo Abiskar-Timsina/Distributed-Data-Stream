@@ -28,4 +28,4 @@ ingress:
   name: "prefect-deployment"
   namespace: "workflow"
   timeout: "30000" # Nginx Ingress uses, ms for timeouts.
-  hostname: "workflow.ack.local"
+  hostname: "workflow.ack.com"

@@ -18,7 +18,7 @@ metadata:
 
 spec:
   rules:
-    - host: grafana.ack.local
+    - host: grafana.ack.com
       http:
         paths:
           - path: /
